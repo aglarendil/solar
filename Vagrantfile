@@ -57,6 +57,9 @@ master_pxe = ansible_playbook_command("pxe.yaml")
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  #Workaround for "stdin is not a tty issue"
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
   config.vm.define "solar-dev", primary: true do |config|
     config.vm.box = MASTER_IMAGE
 
